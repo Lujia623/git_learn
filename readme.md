@@ -9,4 +9,8 @@
 - `git log --pretty=oneline`查看提交日志,行显
 - `git reset --hard HEAD^`回退到上一个版本
 - `git reset --hard 3628164`回退到指定版本
-- `git checkout -- readme.md`让这个文件回到最近一次git commit或git add时的状态
+- `git checkout -- readme.md`让这个文件回到最近一次git commit或git add时的状态,要有`--`,不然变成创建新分支
+- 撤销已经添加到暂存区单位commit的修改
+    1. 先使用`git reset head readme.md`命令
+    2. 再使用`git checkout -- readme.md`命令
+- `git rm <file>`删除文件
