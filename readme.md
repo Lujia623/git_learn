@@ -14,3 +14,4 @@
     1. 先使用`git reset head readme.md`命令
     2. 再使用`git checkout -- readme.md`命令
 - `git rm <file>`删除文件# git_learn
+- `git push -u origin master`push代码到远程分支上
