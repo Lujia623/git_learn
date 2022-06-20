@@ -15,3 +15,12 @@
     2. 再使用`git checkout -- readme.md`命令
 - `git rm <file>`删除文件
 - `git push -u origin master`push代码到远程分支上
+- `git remote add origin git@github.com:michaelliao/learngit.git`关联远程库
+- `git push -u origin master`第一次推送master分支的所有内容
+- `git push origin master`后续每次在本地提交修改后,可以直接向远程库提交修改
+- 在初始化仓库时,最好的方式是从远程库初始化仓库,然后`clone`到本地
+- `git branch dev`创建分支
+- `git checkout dev`切换分支
+- `git checkout -b dev`创建并且切换分支
+- `git branch`命令查看当前分支
+- `git merge dev`用于合并分支
