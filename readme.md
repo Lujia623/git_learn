@@ -23,4 +23,8 @@
 - `git checkout dev`切换分支
 - `git checkout -b dev`创建并且切换分支
 - `git branch`命令查看当前分支
-- `git merge dev`用于合并分支
+- `git merge dev`用于合并分支到当前分支(合并dev分支到master分支上--->Fast-forward)
+- `git branch -d dev`删除分支
+- `git log --graph --pretty=oneline --abbrev-commit`查看分支合并图
+- `git branch -d dev`删除分支
+- `git  merge --no-ff -m "merge with no-ff" dev`此种合并方式包含commit信息,即使删除分支后仍然保留有分支信息
