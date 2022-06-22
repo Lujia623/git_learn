@@ -27,4 +27,9 @@
 - `git branch -d dev`删除分支
 - `git log --graph --pretty=oneline --abbrev-commit`查看分支合并图
 - `git branch -d dev`删除分支
-- `git  merge --no-ff -m "merge with no-ff" dev`此种合并方式包含commit信息,即使删除分支后仍然保留有分支信息
+- `git  merge --no-ff -m "merge with no-ff" dev`此种合并方式包含commit信息,即使删除分支后仍然保留有分支信息,合并后的历史有分支信息
+- `git stash`将当前现场的工作储藏起来,方便以后恢复现场后可以继续工作
+- `git stash list`查看工作现场存储情况
+- `git stash apply`恢复工作现场,但是恢复后工作现场的内容并不删除,后面可以使用`git stash drop`来删除
+- `git stash pop`恢复现场的同时将`stash`内容一并删除
+- `git stash apply stash@{0}`可以恢复指定的`stash`
