@@ -33,3 +33,10 @@
 - `git stash apply`恢复工作现场,但是恢复后工作现场的内容并不删除,后面可以使用`git stash drop`来删除
 - `git stash pop`恢复现场的同时将`stash`内容一并删除
 - `git stash apply stash@{0}`可以恢复指定的`stash`
+- `git branch -D dev`强行删除分支(新建的分支内容有改动,但是未完成合并)
+- `git push origin dev`推送指定分支到远程库
+- `git push origin :dev`推送一个空的分支到远程分支上,相当于删除远程分支
+- `git pull <远程主机名> <远程分支名>:<本地分支名>`取回远程主机某个分支的更新,再与本地的指定的某个分支合并
+- `git pull origin dev`将远程dev分支和当前分支合并
+- `git branch --set-upstream-to=origin/dev`指定本地分支和远程分支链接,本地当前分支追踪远程`dev`分支
+- `git branch --set-upstream dev origin/dev`指定本地分支和远程分支链接,本地`dev`追踪`origin/dev`
