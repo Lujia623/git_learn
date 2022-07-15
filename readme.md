@@ -1,6 +1,7 @@
 ## git常用命令
 
 - `git add file`将文件添加到仓库
+- `git ls-files`查看暂存区文件
 - `git commit -m "说明"`将文件提交到仓库
 - `git diff`查看修改内容
 - `git diff HEAD -- readme.txt`查看工作区和版本库里面最新版本的区别
@@ -13,7 +14,10 @@
 - 撤销已经添加到暂存区单位commit的修改
     1. 先使用`git reset head readme.md`命令
     2. 再使用`git checkout -- readme.md`命令
-- `git rm <file>`删除文件
+- `git rm <file>`删除文件，这个是会直接删除文件，并且会将文件添加到暂存区
+- `git rm --cache <files>` 如果想把文件从暂存区域移除，但仍然希望保留在当前工作目录中，换句话说，仅是从跟踪清单中删除
+- `git rm -f <files>` 如果删除之前修改过并且已经放到暂存区域的话，则必须要用强制删除选项， 强行从暂存区和工作区中删除修改后的文件 
+- `git rm -r --cached .`该命令试了之后会删除暂存区所有的内容，但是查阅资料有说可能会存在误删本地工作区文件，目前试了次命令正常，没有误删文件
 - `git push -u origin master`push代码到远程分支上
 - `git remote add origin git@github.com:michaelliao/learngit.git`关联远程库
 - `git push -u origin master`第一次推送master分支的所有内容
@@ -53,8 +57,15 @@
 - `git tag -d <tag id>`删除本地标签
 - `git push origin :v1.1`或者`git push origin :tags/v1.1`
 - `git config --global clore.ui true`让`git`显示颜色,可以看起来更加醒目
+- `rm .git/index`删除暂存区所有内容
 
 ### 问题
 
 - 使用`git push -u origin master`命令报错如下:
     `! [rejected] master -> master (fetch first)`,原因是远程库版本和本地库版本不一致,可以使用`git push -f origin master`强制推送本地库版本到远程库(谨慎使用),建议先`fecth`后合并再推送到远程库
+- 使用`git rm .`命令误删除了工作区， 如果没有重要的未提交更改，可以使用`git checkout HEAD .`命令 ，这会将所有内容重置为最新提交，--hard 选项是 git reset 最常用的选项。
+    然而，它有一些风险。
+    使用此选项，提交历史引用指针开始指向指定的 git commit。接下来，暂存区和工作目录被重置以匹配声明的提交。
+    先前暂挂到暂存区和工作目录的更改将重置为对应于提交树状态。
+    暂存区和工作目录中的任何挂起提交都将丢失
+- `.gitignore`文件没有写好但是之前已经有commit了，添加后`.gitignore`不起作用：需要将清除暂存区所有的文件，可以使用`git rm -r --cached .`命令或者是`rm .git/index `（谨慎使用`rm .git/index`，会将`git`目录下的`index`文件删除）
