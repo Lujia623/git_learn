@@ -1,7 +1,7 @@
 ## git常用命令
 
 - `git add file`将文件添加到仓库
-- `git ls-files`查看暂存区文件
+- `git ls-files`查看暂存区文件
 - `git commit -m "说明"`将文件提交到仓库
 - `git diff`查看修改内容
 - `git diff HEAD -- readme.txt`查看工作区和版本库里面最新版本的区别
@@ -61,11 +61,45 @@
 
 ### 问题
 
-- 使用`git push -u origin master`命令报错如下:
+- **使用`git push -u origin master`命令报错如下:**
     `! [rejected] master -> master (fetch first)`,原因是远程库版本和本地库版本不一致,可以使用`git push -f origin master`强制推送本地库版本到远程库(谨慎使用),建议先`fecth`后合并再推送到远程库
-- 使用`git rm .`命令误删除了工作区， 如果没有重要的未提交更改，可以使用`git checkout HEAD .`命令 ，这会将所有内容重置为最新提交，--hard 选项是 git reset 最常用的选项。
+    
+- **使用`git rm .`命令误删除了工作区， 如果没有重要的未提交更改**，可以使用`git checkout HEAD .`命令 ，这会将所有内容重置为最新提交，--hard 选项是 git reset 最常用的选项。
     然而，它有一些风险。
     使用此选项，提交历史引用指针开始指向指定的 git commit。接下来，暂存区和工作目录被重置以匹配声明的提交。
     先前暂挂到暂存区和工作目录的更改将重置为对应于提交树状态。
     暂存区和工作目录中的任何挂起提交都将丢失
-- `.gitignore`文件没有写好但是之前已经有commit了，添加后`.gitignore`不起作用：需要将清除暂存区所有的文件，可以使用`git rm -r --cached .`命令或者是`rm .git/index `（谨慎使用`rm .git/index`，会将`git`目录下的`index`文件删除）
+    
+- **`.gitignore`文件没有写好但是之前已经有commit了，添加后`.gitignore`不起作用：**需要将清除暂存区所有的文件，可以使用`git rm -r --cached .`命令或者是`rm .git/index `（谨慎使用`rm .git/index`，会将`git`目录下的`index`文件删除）
+
+- **关于`CRLF、LF`问题:**
+
+    问题描述:在使用`git add .`命令后出现`warning: LF will be replaced by CRLF in ......`信息，其原因是因为跨平台编辑代码导致的，在不同的平台上编辑代码时行结束符不一致，如下：
+
+    |  OS   |       END LINE       |
+    | :---: | :------------------: |
+    |  Win  | CRLF（回车换行结束） |
+    | Linux |   LF （换行结束）    |
+    |  Mac  |   LF （回车结束）    |
+
+    在`Win`下的`git`，其配置为：`core.autocrlf=true`，即默认添加的时候会将`LF`转换为`CRLF`， Git可以在你提交时自动地把行结束符CRLF转换成LF，而在签出代码时把LF转换成CRLF。用`core.autocrlf`来打开此项功能，如果是在Windows系统上，把它设置成`true`，这样当签出代码时，LF会被转换成CRLF；
+    
+    ```text
+    $ git config --global core.autocrlf true
+    ```
+    
+     Linux或Mac系统使用LF作为行结束符，因此你不想 Git 在签出文件时进行自动的转换；当一个以CRLF为行结束符的文件不小心被引入时你肯定想进行修正，把`core.autocrlf`设置成input来告诉 Git 在提交时把CRLF转换成LF，签出时不转换： 
+    
+    ```text
+    $ git config --global core.autocrlf input
+    ```
+    
+     这样会在Windows系统上的签出文件中保留CRLF，会在Mac和Linux系统上，包括仓库中保留LF。 
+    
+     如果你是Windows程序员，且正在开发仅运行在Windows上的项目，可以设置`false`取消此功能，把回车符记录在库中： 
+    
+    ```text
+    $ git config --global core.autocrlf false
+    ```
+    目前因为在Win下编程，已经设置了为`false`。
+
