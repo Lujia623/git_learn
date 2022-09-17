@@ -44,6 +44,7 @@
 - `git pull origin dev`将远程dev分支和当前分支合并
 - `git branch --set-upstream-to=origin/dev`指定本地分支和远程分支链接,本地当前分支追踪远程`dev`分支
 - `git branch --set-upstream dev origin/dev`指定本地分支和远程分支链接,本地`dev`追踪`origin/dev`
+- `git push --set-upstream dev`将本地`dev`分支链接到远程`dev`分支并`push`
 - `git remote -v`查看远程库分支信息
 - 从本第推送分支,使用`git push origin dev`,如果推送失败,则需要pull,如果有冲突,则需要解决冲突然后再本地提交,再推送到远程分支上
 - `git checkout -b dev origin/dev`新建一个分支`dev`,并将其和远程库分支`dev`建立跟踪关系
